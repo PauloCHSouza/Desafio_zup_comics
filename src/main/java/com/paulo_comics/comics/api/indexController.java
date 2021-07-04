@@ -1,20 +1,23 @@
 package com.paulo_comics.comics.api;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/")
 public class indexController {
 	
 	@GetMapping()
-	public String hello() {
-		return "Hello Spring Boot";
+	public String get() {
+		return "GET Spring Boot";
 	}
 	
-	@GetMapping("/teste") 
-	public String teste() {
-		return "Hello Spring Boot teste";
+	@PostMapping("/login")
+	public String login(@RequestParam("login") String login, @RequestParam("senha") String senha) {
+		return "Login: " + login + ", Senha: " + senha;
+	}
+	
+	@GetMapping("/usuarios/{id}")
+	public String getUsuarioById(@PathVariable("id") Long id) {
+		return "Usuário: " + id;
 	}
 }
