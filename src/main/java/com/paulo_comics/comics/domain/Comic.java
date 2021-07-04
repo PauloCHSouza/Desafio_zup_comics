@@ -69,7 +69,6 @@ public class Comic {
 		this.isbn = isbn;
 		this.descricao = descricao;
 	}
-
 	public Long getComicId() {
 		return comicId;
 	}
@@ -77,6 +76,15 @@ public class Comic {
 	public void setComicId(Long comicId) {
 		this.comicId = comicId;
 	}
+
+	public Long getUsuarioId() {
+		return usuarioId;
+	}
+
+	public void setUsuarioId(Long usuarioId) {
+		this.usuarioId = usuarioId;
+	}
+
 
 	public String getTitulo() {
 		return titulo;
