@@ -1,11 +1,8 @@
 package com.paulo_comics.comics.domain;
 
-import org.springframework.data.repository.CrudRepository;
 
-public interface ComicRepository extends CrudRepository<Comic, Long>{
+import org.springframework.data.jpa.repository.JpaRepository;
 
-	Iterable<Comic> findByTitulo(String titulo);
-
-	Iterable<Comic> findByAutores(String autores);
-	
+public interface ComicRepository extends JpaRepository<Comic, Long>{
+		
 }

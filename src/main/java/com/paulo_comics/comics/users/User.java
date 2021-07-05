@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity(name = "usuarios")
 @Table(
         name = "usuarios",
@@ -52,8 +54,9 @@ public class User {
     @Column(
             name = "dtNascimento",
             nullable = false,
-            columnDefinition = "date"
-    )
+            columnDefinition = "date"	
+    )	
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dtNascimento;
 	
 	public User() {

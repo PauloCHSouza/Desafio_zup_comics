@@ -52,15 +52,15 @@ public class Comic {
 	@Column(
             name = "isbn",
             nullable = false,
-            columnDefinition = "int"
+            columnDefinition = "varchar(13)"
     )
-	private Long isbn;
+	private String isbn;
 	
 	public Comic() {
 		
 	}
 	 
-	public Comic(Long comicId, Long usuarioId, String titulo, Double preco, String autores, Long isbn, String descricao) {
+	public Comic(Long comicId, Long usuarioId, String titulo, Double preco, String autores, String isbn, String descricao) {
 		this.comicId = comicId;
 		this.usuarioId = usuarioId;
 		this.titulo = titulo;
@@ -69,6 +69,7 @@ public class Comic {
 		this.isbn = isbn;
 		this.descricao = descricao;
 	}
+	
 	public Long getComicId() {
 		return comicId;
 	}
@@ -118,11 +119,11 @@ public class Comic {
 		this.preco = preco;
 	}
 
-	public Long getIsbn() {
+	public String getIsbn() {
 		return isbn;
 	}
 
-	public void setIsbn(Long isbn) {
+	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
 	

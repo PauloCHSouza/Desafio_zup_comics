@@ -1,11 +1,13 @@
 package com.paulo_comics.comics.users;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.Optional;
 
-public interface UserRepository extends CrudRepository<User, Long>{
+import org.springframework.data.jpa.repository.JpaRepository;
 
-	Iterable<User> findByNome(String nome);
+public interface UserRepository extends JpaRepository<User, Long>{
 
-	Iterable<User> findByCpf(String cpf);
+	Optional<User> findByCpf(String cpf);
 
+	Optional<User> findByEmail(String email);
+	
 }
