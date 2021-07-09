@@ -7,7 +7,6 @@ import javax.persistence.*;
 public class Comic {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(
             name = "comicId",
             updatable = false
@@ -38,7 +37,7 @@ public class Comic {
 	@Column(
             name = "autores",
             nullable = false,
-            columnDefinition = "varchar(100)"
+            columnDefinition = "longtext"
     )
 	private String autores;
 	
@@ -126,6 +125,5 @@ public class Comic {
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
-	
 	
 }

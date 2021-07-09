@@ -35,6 +35,18 @@ public class ComicService {
 			return c;
 		}
 	}
+	
+
+
+	public Optional<Comic> getComicsByIdAndUser(Long id, Long usuarioId) {
+		Optional<Comic> c = rep.findByIdAndUser(id, usuarioId);
+		
+		if (c.isEmpty() || c == null) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nenhum registro encontrado com o ID: " + id);
+		} else {
+			return c;
+		}
+	}
 
 	public Comic save(Comic comic) {
 		
@@ -51,6 +63,8 @@ public class ComicService {
 		if (comic.getDescricao().isEmpty()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Descrição não informada!");
 
 		if (comic.getUsuarioId() == null) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário não informado!");
+		
+		if (!getComicsByIdAndUser(comic.getComicId(), comic.getUsuarioId()).isEmpty()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "A Comic informada já está vinculada com este usuário!");	
 		
 		rep.save(comic);
 		
