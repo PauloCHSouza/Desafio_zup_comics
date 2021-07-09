@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface MarvelService {
 	
 	@GetMapping("{comicId}?ts=1&apikey=62199db4913258cd1e56378cf7909922&hash=f73733a4a9c3cfec9c4a8a96442401ab")
-	MarvelData buscaComicPorId(@PathVariable("comicId") Long comicId);
+	MarvelData findComicById(@PathVariable("comicId") Long comicId);
 }

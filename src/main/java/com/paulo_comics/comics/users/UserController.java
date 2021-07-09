@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,16 +33,6 @@ public class UserController {
 	@PostMapping("/incluir")
 	public User post(@RequestBody User user) {
 		return service.save(user);
-	}
-	
-	@PutMapping("/atualizar")
-	public User put(@RequestBody User user) {
-		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Nenhum ID informado!");
-	}
-	
-	@PutMapping("/atualizar/{id}")
-	public User put(@PathVariable("id") Long id,  @RequestBody User user) {
-		return service.update(user, id);
 	}
 	
 	@DeleteMapping("/deletar")

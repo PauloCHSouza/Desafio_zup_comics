@@ -1,6 +1,16 @@
 package com.paulo_comics.comics.domain;
 
-import javax.persistence.*;
+import java.util.Calendar;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.paulo_comics.comics.users.User;
 
 @Entity(name = "comics")
 @Table(name = "comics")
@@ -13,12 +23,10 @@ public class Comic {
     )
 	private Long comicId;
 	
-	@Column(
-            name = "usuarioId",
-            updatable = false,
-            columnDefinition = "int"
-    )
-	private Long usuarioId;
+
+	@ManyToOne
+    @JoinColumn(name = "usuarioId")
+	private User usuarioId;
 	
 	@Column(
             name = "titulo",
@@ -44,7 +52,7 @@ public class Comic {
 	@Column(
             name = "preco",
             nullable = false,
-            columnDefinition = "decimal"
+            columnDefinition = "double"
     )
 	private Double preco;
 	
@@ -55,11 +63,21 @@ public class Comic {
     )
 	private String isbn;
 	
+	@Column(
+            name = "diaDesconto",
+            nullable = false,
+            columnDefinition = "int"
+    )
+	private Integer diaDesconto;
+	
+	@Transient
+	private Boolean descontoAtivo;
+
 	public Comic() {
 		
 	}
 	 
-	public Comic(Long comicId, Long usuarioId, String titulo, Double preco, String autores, String isbn, String descricao) {
+	public Comic(Long comicId, User usuarioId, String titulo, Double preco, String autores, String isbn, String descricao, Integer diaDesconto, Boolean descontoAtivo) {
 		this.comicId = comicId;
 		this.usuarioId = usuarioId;
 		this.titulo = titulo;
@@ -77,12 +95,12 @@ public class Comic {
 		this.comicId = comicId;
 	}
 
-	public Long getUsuarioId() {
+	public User getUsuarioId() {
 		return usuarioId;
 	}
 
-	public void setUsuarioId(Long usuarioId) {
-		this.usuarioId = usuarioId;
+	public void setUsuarioId(User optional) {
+		this.usuarioId = optional;
 	}
 
 
@@ -111,7 +129,11 @@ public class Comic {
 	}
 
 	public Double getPreco() {
-		return preco;
+		if (getDescontoAtivo()) {
+			return preco-(preco*0.1);
+		}else {
+			return preco;
+		}
 	}
 
 	public void setPreco(Double preco) {
@@ -124,6 +146,41 @@ public class Comic {
 
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
+	}
+	
+	public Integer getDiaDesconto() {
+		return diaDesconto;
+	}
+
+	public void setDiaDesconto(Integer diaDesconto) {
+		this.diaDesconto = diaDesconto;
+	}
+
+	public Boolean getDescontoAtivo() {
+		return  validaDesconto(diaDesconto, verificaDiaSemana());
+	}
+	
+	public Integer verificaDiaSemana() {
+		Calendar c = Calendar.getInstance();
+		int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+		return dayOfWeek;
+	}
+	
+	public Boolean validaDesconto(Integer diaDesconto, Integer diaSemana) {
+		
+		if ((diaDesconto.equals(0) || diaDesconto.equals(1)) && diaSemana.equals(2)) {
+			return true;
+		}else if ((diaDesconto.equals(2) || diaDesconto.equals(3)) && diaSemana.equals(3)) {
+			return true;
+		}else if ((diaDesconto.equals(4) || diaDesconto.equals(5)) && diaSemana.equals(4)) {
+			return true;
+		}else if ((diaDesconto.equals(6) || diaDesconto.equals(7)) && diaSemana.equals(5)) {
+			return true;
+		}else if ((diaDesconto.equals(8) || diaDesconto.equals(9)) && diaSemana.equals(6)) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 }
