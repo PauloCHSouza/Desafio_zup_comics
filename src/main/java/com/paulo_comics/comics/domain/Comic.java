@@ -4,6 +4,8 @@ import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,6 +19,13 @@ import com.paulo_comics.comics.users.User;
 public class Comic {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(
+            name = "Id",
+            updatable = false
+    )
+	private Long Id;
+	
 	@Column(
             name = "comicId",
             updatable = false
