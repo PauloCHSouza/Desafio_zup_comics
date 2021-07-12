@@ -1,6 +1,5 @@
 package com.paulo_comics.comics.domain;
 
-import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,21 +74,5 @@ public class ComicService {
 		
 		throw new ResponseStatusException(HttpStatus.CREATED, "Comic cadastrada com sucesso!");
 		
-	}
-
-	public Comic delete(Long id) {
-		Optional<Comic> optional = getComicsById(id);
-		if (optional.isPresent()) {
-			rep.deleteById(id);
-			throw new ResponseStatusException(HttpStatus.OK, "Comic excluída com sucesso!");
-		} else {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Não foi possivel localizar o registro de ID: " + id);
-		}
-	}
-	
-	public Integer verificaDiaSemana() {
-		Calendar c = Calendar.getInstance();
-		int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-		return dayOfWeek;
 	}
 }

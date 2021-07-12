@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(url= "http://gateway.marvel.com/v1/public/comics/" , name = "marvelApi")
-public interface MarvelService {
+public interface MarvelInterface {
 	
-	@GetMapping("{comicId}?ts=1&apikey=62199db4913258cd1e56378cf7909922&hash=f73733a4a9c3cfec9c4a8a96442401ab")
-	MarvelData findComicById(@PathVariable("comicId") Long comicId);
+	@GetMapping("{comicId}?ts={ts}&apikey={chaveMarvel}&hash={hashMarvel}")
+	MarvelData findComicById(@PathVariable("comicId") Long comicId, @PathVariable("chaveMarvel") String chaveMarvel, @PathVariable("ts") Long ts, @PathVariable("hashMarvel") String hashMarvel);
 }

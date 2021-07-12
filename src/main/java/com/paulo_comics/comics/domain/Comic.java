@@ -59,7 +59,7 @@ public class Comic {
 	@Column(
             name = "isbn",
             nullable = false,
-            columnDefinition = "varchar(13)"
+            columnDefinition = "varchar(25)"
     )
 	private String isbn;
 	

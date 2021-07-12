@@ -71,15 +71,5 @@ public class UserService {
 		
 		throw new ResponseStatusException(HttpStatus.CREATED, "Usuário cadastrado com sucesso!");
 	}
-
-	public User delete(Long id) {
-		Optional<User> optional = getUsersById(id);
-		if (optional.isPresent()) {
-			rep.deleteById(id);
-			throw new ResponseStatusException(HttpStatus.OK, "Usuário excluído com sucesso!");
-		} else {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Não foi possivel localizar o registro de ID: " + id);
-		}
-	}
 	
 }

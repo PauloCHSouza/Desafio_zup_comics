@@ -4,17 +4,17 @@ import java.util.List;
 
 public class Marvel {
 	
-	private Integer id;
+	private Long id;
 	private String title;
 	private String Description;
 	private String isbn;
 	private List<MarvelPrice> prices;
 	private MarvelCreators creators;
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getTitle() {
